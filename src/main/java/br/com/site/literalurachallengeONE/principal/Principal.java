@@ -1,6 +1,5 @@
 package br.com.site.literalurachallengeONE.principal;
 
-import br.com.site.literalurachallengeONE.model.DadosLivro;
 import br.com.site.literalurachallengeONE.model.Livro;
 import br.com.site.literalurachallengeONE.model.Resultado;
 import br.com.site.literalurachallengeONE.service.ConsumoApi;
@@ -70,7 +69,7 @@ public class Principal {
     private Livro getDadosLivro(){
 //        System.out.println("Digite o nome do livro para buscar: ");
 //        var nomeLivro = leitura.nextLine();
-        var json = consumo.obterDados("https://gutendex.com/books/?search=ushdusahduhsudu");
+        var json = consumo.obterDados("https://gutendex.com/books/?search=casmurro");
         Livro dados = conversor.obterDados(json, Livro.class);
         return dados;
     }
