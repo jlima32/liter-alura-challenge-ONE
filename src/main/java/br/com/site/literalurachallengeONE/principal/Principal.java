@@ -63,7 +63,9 @@ public class Principal {
             var title = resultado.getTitulo();
             var downloads = resultado.getNumeroDownloads();
             var autores = resultado.getAutor();
-            var autor = autores.get(0).getName();
+            var autor = autores.get(0).getNome();
+            var nascimento = autores.get(0).getAnoNascimento();
+            var falescimento = autores.get(0).getAnoFalescimento();
             var idiomas = resultado.getIdioma();
             var idioma = idiomas.get(0);
             System.out.println("#### LIVRO ####");
@@ -71,6 +73,8 @@ public class Principal {
             System.out.println("Autor: " + autor);
             System.out.println("Idioma: " + idioma);
             System.out.println("Número de Downloads: " + downloads);
+            System.out.println("Ano N: " + nascimento);
+            System.out.println("Ano F: " + falescimento);
             System.out.println("\n---------------------\n");
         } else {
             System.out.println("Nenhum Livro encontrado");

@@ -1,40 +1,42 @@
 package br.com.site.literalurachallengeONE.model;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
+import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
+@Entity
+@Table(name = "autores")
 public class Autor {
-    private String name;
-    private int birth_year;
-    private int death_year;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @JsonAlias("name") private String nome;
+    @JsonAlias("birth_year") private int anoNascimento;
+    @JsonAlias("death_year") private int anoFalescimento;
 
-    public String getName() {
-        return name;
+    @OneToMany(mappedBy = "autor", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Livro> livros = new ArrayList<>();
+
+    public String getNome() {
+        return nome;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public int getAnoNascimento() {
+        return anoNascimento;
     }
 
-    public int getBirth_year() {
-        return birth_year;
+    public int getAnoFalescimento() {
+        return anoFalescimento;
     }
 
-    public void setBirth_year(int birth_year) {
-        this.birth_year = birth_year;
-    }
-
-    public int getDeath_year() {
-        return death_year;
-    }
-
-    public void setDeath_year(int death_year) {
-        this.death_year = death_year;
-    }
 
     @Override
     public String toString() {
         return "Autor{" +
-                "name='" + name + '\'' +
-                ", birth_year=" + birth_year +
-                ", death_year=" + death_year +
+                "name='" + nome + '\'' +
+                ", birth_year=" + anoNascimento +
+                ", death_year=" + anoFalescimento +
                 '}';
     }
 }
