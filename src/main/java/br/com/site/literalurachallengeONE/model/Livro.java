@@ -16,4 +16,12 @@ public class Livro {
     @ManyToOne
     private Autor autor;
 
+    public Livro() {
+    }
+
+    public Livro(Resultado resultado) {
+        this.titulo = resultado.getTitulo();
+        this.idioma = String.valueOf(resultado.getIdioma()).replace("[","").replace("]","");
+        this.numeroDownloads = resultado.getNumeroDownloads();
+    }
 }

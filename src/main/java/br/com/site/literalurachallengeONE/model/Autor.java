@@ -18,6 +18,8 @@ public class Autor {
     @OneToMany(mappedBy = "autor", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Livro> livros = new ArrayList<>();
 
+
+
     public String getNome() {
         return nome;
     }

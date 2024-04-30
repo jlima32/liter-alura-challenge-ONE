@@ -14,4 +14,11 @@ public class DadosLivro {
     public void setResults(List<Resultado> results) {
         this.results = results;
     }
+
+    @Override
+    public String toString() {
+        return "DadosLivro{" +
+                "results=" + results +
+                '}';
+    }
 }

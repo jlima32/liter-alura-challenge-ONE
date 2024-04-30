@@ -4,17 +4,22 @@ import br.com.site.literalurachallengeONE.model.Autor;
 import br.com.site.literalurachallengeONE.model.DadosLivro;
 import br.com.site.literalurachallengeONE.model.Livro;
 import br.com.site.literalurachallengeONE.model.Resultado;
+import br.com.site.literalurachallengeONE.repository.LivroRepository;
 import br.com.site.literalurachallengeONE.service.ConsumoApi;
 import br.com.site.literalurachallengeONE.service.ConverteDados;
 
-import java.util.List;
 import java.util.Scanner;
 
 public class Principal {
+    private LivroRepository repositorioLivro;
     private Scanner leitura = new Scanner(System.in);
     private ConsumoApi consumo = new ConsumoApi();
     private ConverteDados conversor = new ConverteDados();
     private final String ENDERECO = "https://gutendex.com/books/?search=";
+
+    public Principal(LivroRepository repositorioLivro) {
+        this.repositorioLivro = repositorioLivro;
+    }
 
     public void exibeMenu(){
         var opcao = -1;
@@ -76,6 +81,10 @@ public class Principal {
             System.out.println("Ano N: " + nascimento);
             System.out.println("Ano F: " + falescimento);
             System.out.println("\n---------------------\n");
+            Livro livro = new Livro(resultado);
+            repositorioLivro.save(livro);
+//            System.out.println(resultado);
+
         } else {
             System.out.println("Nenhum Livro encontrado");
             exibeMenu();
