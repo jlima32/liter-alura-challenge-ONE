@@ -1,16 +1,19 @@
 package br.com.site.literalurachallengeONE.principal;
 
-import br.com.site.literalurachallengeONE.model.Livro;
+import br.com.site.literalurachallengeONE.model.Autor;
+import br.com.site.literalurachallengeONE.model.DadosLivro;
 import br.com.site.literalurachallengeONE.model.Resultado;
 import br.com.site.literalurachallengeONE.service.ConsumoApi;
 import br.com.site.literalurachallengeONE.service.ConverteDados;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class Principal {
     private Scanner leitura = new Scanner(System.in);
     private ConsumoApi consumo = new ConsumoApi();
     private ConverteDados conversor = new ConverteDados();
+    private final String ENDERECO = "https://gutendex.com/books/?search=";
 
     public void exibeMenu(){
         var opcao = -1;
@@ -53,25 +56,32 @@ public class Principal {
     }
 
     private void buscarLivro() {
-//        var json = consumo.obterDados("https://gutendex.com/books/?search=dom%20casmurro");
-//        System.out.println(json);
-        Livro livro = getDadosLivro();
-        if (livro != null && livro.getResults() != null && !livro.getResults().isEmpty()) {
-            Resultado resultado = livro.getResults().get(0);
-            String title = resultado.getTitle();
-            System.out.println("Título do livro: " + title);
-            System.out.println(resultado);
+        DadosLivro dadosLivro = getDadosLivro();
+        if (dadosLivro != null && dadosLivro.getResults() != null && !dadosLivro.getResults().isEmpty()) {
+            Resultado resultado = dadosLivro.getResults().get(0);
+            var title = resultado.getTitulo();
+            var downloads = resultado.getNumeroDownloads();
+            var autores = resultado.getAutor();
+            var autor = autores.get(0).getName();
+            var idiomas = resultado.getIdioma();
+            var idioma = idiomas.get(0);
+            System.out.println("#### LIVRO ####");
+            System.out.println("Título: " + title);
+            System.out.println("Autor: " + autor);
+            System.out.println("Idioma: " + idioma);
+            System.out.println("Número de Downloads: " + downloads);
+            System.out.println("\n---------------------\n");
         } else {
-            System.out.println("Nenhum livro encontrado");
+            System.out.println("Nenhum Livro encontrado");
+            exibeMenu();
         }
     }
 
-    private Livro getDadosLivro(){
-//        System.out.println("Digite o nome do livro para buscar: ");
-//        var nomeLivro = leitura.nextLine();
-        var json = consumo.obterDados("https://gutendex.com/books/?search=casmurro");
-        Livro dados = conversor.obterDados(json, Livro.class);
-        return dados;
+    private DadosLivro getDadosLivro(){
+        System.out.println("Digite o nome do Livro para buscar: ");
+        var nomeLivro = leitura.nextLine();
+        var json = consumo.obterDados(ENDERECO + nomeLivro.replace(" ", "%20"));
+        return conversor.obterDados(json, DadosLivro.class);
     }
 
 

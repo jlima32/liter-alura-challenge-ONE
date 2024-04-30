@@ -1,56 +1,46 @@
 package br.com.site.literalurachallengeONE.model;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Resultado {
-    private int id;
-    private String title;
-    private List<String> languages;
-    private List<Autor> authors;
+    @JsonAlias("title") private String titulo;
+    @JsonAlias("languages") private List<String> idioma;
+    @JsonAlias("authors") private List<Autor> autor;
+    @JsonAlias("download_count") private int numeroDownloads;
 
 
-    public int getId() {
-        return id;
+
+    public String getTitulo() {
+        return titulo;
     }
 
-    public void setId(int id) {
-        this.id = id;
+
+    public List<String> getIdioma() {
+        return idioma;
     }
 
-    public String getTitle() {
-        return title;
+
+    public List<Autor> getAutor() {
+        return autor;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+
+    public int getNumeroDownloads() {
+        return numeroDownloads;
     }
 
-    public List<String> getLanguages() {
-        return languages;
-    }
-
-    public void setLanguages(List<String> languages) {
-        this.languages = languages;
-    }
-
-    public List<Autor> getAuthors() {
-        return authors;
-    }
-
-    public void setAuthors(List<Autor> authors) {
-        this.authors = authors;
-    }
 
     @Override
     public String toString() {
         return "Resultado{" +
-                "id=" + id +
-                ", Título: '" + title + '\'' +
-                ", Idioma: '" + languages + '\'' +
-                ", Autor: '" + authors + '\'' +
+                ", Título: '" + titulo + '\'' +
+                ", Idioma: '" + idioma + '\'' +
+                ", Autor: '" + autor + '\'' +
+                ", Downloads: '" + numeroDownloads + '\'' +
                 '}';
     }
 }
