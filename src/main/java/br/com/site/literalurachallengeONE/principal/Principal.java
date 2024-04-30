@@ -110,6 +110,9 @@ public class Principal {
     }
 
     private void listarAutores() {
+        List<Autor> autores = repositorioAutor.findAll();
+        autores.forEach(autor -> imprimeAutor(autor.getNome(),autor.getAnoNascimento(), autor.getAnoFalecimento()));
+        exibeMenu();
     }
 
     private void listarAutoresVivosAno() {
@@ -126,6 +129,18 @@ public class Principal {
         System.out.println("Número de Downloads: " + downloads);
         System.out.println("----------------");
     }
+
+    private void imprimeAutor(String nome, Integer anoNascimento, Integer anoFalecimento){
+        System.out.println("\nNome: " + nome);
+        System.out.println("Ano Nascimento: " + anoNascimento);
+        System.out.println("Ano Falecimento: " + anoFalecimento);
+        System.out.println("LIVROS: ");
+        for (Livro livro : repositorioAutor.livroPorAutor(nome)) {
+            System.out.println(livro.getTitulo());
+        }
+        System.out.println("----------------");
+    }
+
 
 
 

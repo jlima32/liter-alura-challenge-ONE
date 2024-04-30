@@ -13,7 +13,7 @@ public class Autor {
     private Long id;
     @JsonAlias("name") private String nome;
     @JsonAlias("birth_year") private int anoNascimento;
-    @JsonAlias("death_year") private int anoFalescimento;
+    @JsonAlias("death_year") private int anoFalecimento;
 
     @OneToMany(mappedBy = "autor", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Livro> livros = new ArrayList<>();
@@ -24,7 +24,8 @@ public class Autor {
     public Autor(Autor autor) {
         this.nome = autor.getNome();
         this.anoNascimento = autor.getAnoNascimento();
-        this.anoFalescimento = autor.getAnoFalescimento();
+        this.anoFalecimento = autor.getAnoFalecimento();
+
     }
 
 
@@ -32,21 +33,29 @@ public class Autor {
         return nome;
     }
 
+    public List<Livro> getLivros() {
+        return livros;
+    }
+
+    public void setLivros(List<Livro> livros) {
+        this.livros = livros;
+    }
+
     public int getAnoNascimento() {
         return anoNascimento;
     }
 
-    public int getAnoFalescimento() {
-        return anoFalescimento;
+    public int getAnoFalecimento() {
+        return anoFalecimento;
     }
-
 
     @Override
     public String toString() {
         return "Autor{" +
                 "name='" + nome + '\'' +
                 ", birth_year=" + anoNascimento +
-                ", death_year=" + anoFalescimento +
+                ", death_year=" + anoFalecimento +
+
                 '}';
     }
 }
