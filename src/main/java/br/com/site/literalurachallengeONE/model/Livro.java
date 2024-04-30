@@ -19,6 +19,10 @@ public class Livro {
     public Livro() {
     }
 
+    public void setAutor(Autor autor) {
+        this.autor = autor;
+    }
+
     public Livro(Resultado resultado) {
         this.titulo = resultado.getTitulo();
         this.idioma = String.valueOf(resultado.getIdioma()).replace("[","").replace("]","");

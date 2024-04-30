@@ -34,6 +34,7 @@ public class Resultado {
     }
 
 
+
     @Override
     public String toString() {
         return "Resultado{" +

@@ -18,6 +18,14 @@ public class Autor {
     @OneToMany(mappedBy = "autor", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Livro> livros = new ArrayList<>();
 
+    public Autor() {
+    }
+
+    public Autor(Autor autor) {
+        this.nome = autor.getNome();
+        this.anoNascimento = autor.getAnoNascimento();
+        this.anoFalescimento = autor.getAnoFalescimento();
+    }
 
 
     public String getNome() {

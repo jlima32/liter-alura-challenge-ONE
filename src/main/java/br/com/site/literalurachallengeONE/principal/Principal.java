@@ -4,6 +4,7 @@ import br.com.site.literalurachallengeONE.model.Autor;
 import br.com.site.literalurachallengeONE.model.DadosLivro;
 import br.com.site.literalurachallengeONE.model.Livro;
 import br.com.site.literalurachallengeONE.model.Resultado;
+import br.com.site.literalurachallengeONE.repository.AutorRepository;
 import br.com.site.literalurachallengeONE.repository.LivroRepository;
 import br.com.site.literalurachallengeONE.service.ConsumoApi;
 import br.com.site.literalurachallengeONE.service.ConverteDados;
@@ -12,13 +13,15 @@ import java.util.Scanner;
 
 public class Principal {
     private LivroRepository repositorioLivro;
+    private AutorRepository repositorioAutor;
     private Scanner leitura = new Scanner(System.in);
     private ConsumoApi consumo = new ConsumoApi();
     private ConverteDados conversor = new ConverteDados();
     private final String ENDERECO = "https://gutendex.com/books/?search=";
 
-    public Principal(LivroRepository repositorioLivro) {
+    public Principal(LivroRepository repositorioLivro, AutorRepository repositorioAutor) {
         this.repositorioLivro = repositorioLivro;
+        this.repositorioAutor = repositorioAutor;
     }
 
     public void exibeMenu(){
@@ -61,33 +64,33 @@ public class Principal {
 
     }
 
-    private void buscarLivro() {
+    private Autor buscarLivro() {
         DadosLivro dadosLivro = getDadosLivro();
         if (dadosLivro != null && dadosLivro.getResults() != null && !dadosLivro.getResults().isEmpty()) {
             Resultado resultado = dadosLivro.getResults().get(0);
             var title = resultado.getTitulo();
             var downloads = resultado.getNumeroDownloads();
-            var autores = resultado.getAutor();
-            var autor = autores.get(0).getNome();
-            var nascimento = autores.get(0).getAnoNascimento();
-            var falescimento = autores.get(0).getAnoFalescimento();
+            var autor = resultado.getAutor().get(0);
             var idiomas = resultado.getIdioma();
             var idioma = idiomas.get(0);
-            System.out.println("#### LIVRO ####");
-            System.out.println("Título: " + title);
-            System.out.println("Autor: " + autor);
-            System.out.println("Idioma: " + idioma);
-            System.out.println("Número de Downloads: " + downloads);
-            System.out.println("Ano N: " + nascimento);
-            System.out.println("Ano F: " + falescimento);
-            System.out.println("\n---------------------\n");
             Livro livro = new Livro(resultado);
+            Autor novoAutor = verificaCadastroAutor(autor);
+            livro.setAutor(novoAutor);
             repositorioLivro.save(livro);
-//            System.out.println(resultado);
 
         } else {
             System.out.println("Nenhum Livro encontrado");
             exibeMenu();
+        }
+        return null;
+    }
+
+    private Autor verificaCadastroAutor(Autor autor){
+        Autor autorCadastrado = repositorioAutor.findByNome(autor.getNome());
+        if(autorCadastrado != null){
+            return autorCadastrado;
+        }else{
+            return repositorioAutor.save(autor);
         }
     }
 
