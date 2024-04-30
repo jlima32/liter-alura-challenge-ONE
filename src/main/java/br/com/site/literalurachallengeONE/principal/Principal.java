@@ -2,6 +2,7 @@ package br.com.site.literalurachallengeONE.principal;
 
 import br.com.site.literalurachallengeONE.model.Autor;
 import br.com.site.literalurachallengeONE.model.DadosLivro;
+import br.com.site.literalurachallengeONE.model.Livro;
 import br.com.site.literalurachallengeONE.model.Resultado;
 import br.com.site.literalurachallengeONE.service.ConsumoApi;
 import br.com.site.literalurachallengeONE.service.ConverteDados;
