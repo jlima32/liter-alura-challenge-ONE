@@ -9,6 +9,7 @@ import br.com.site.literalurachallengeONE.repository.LivroRepository;
 import br.com.site.literalurachallengeONE.service.ConsumoApi;
 import br.com.site.literalurachallengeONE.service.ConverteDados;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class Principal {
@@ -72,12 +73,7 @@ public class Principal {
             var downloads = resultado.getNumeroDownloads();
             var autor = resultado.getAutor().get(0);
             var idioma = resultado.getIdioma().get(0);
-            System.out.println("\n---- LIVRO ----");
-            System.out.println("Titulo: " + title);
-            System.out.println("Autor: " + autor.getNome());
-            System.out.println("Idioma: " + idioma);
-            System.out.println("Número de Downloads: " + downloads);
-            System.out.println("-------------------");
+            imprimeLivro(title, autor.getNome(), idioma, downloads);
             Livro livro = new Livro(resultado);
             Autor novoAutor = verificaCadastroAutor(autor);
             livro.setAutor(novoAutor);
@@ -107,9 +103,10 @@ public class Principal {
         return conversor.obterDados(json, DadosLivro.class);
     }
 
-
-
     private void listarLivros() {
+        List<Livro> livros = repositorioLivro.findAllByOrderByTitulo();
+        livros.forEach(livro -> imprimeLivro(livro.getTitulo(),livro.getAutor().getNome(),livro.getIdioma(),livro.getNumeroDownloads()));
+        exibeMenu();
     }
 
     private void listarAutores() {
@@ -119,6 +116,15 @@ public class Principal {
     }
 
     private void listarLivrosIdioma() {
+    }
+
+    private void imprimeLivro(String title, String autor, String idioma, int downloads){
+        System.out.println("\n---- LIVRO ----");
+        System.out.println("Titulo: " + title);
+        System.out.println("Autor: " + autor);
+        System.out.println("Idioma: " + idioma);
+        System.out.println("Número de Downloads: " + downloads);
+        System.out.println("----------------");
     }
 
 

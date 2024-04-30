@@ -19,13 +19,41 @@ public class Livro {
     public Livro() {
     }
 
-    public void setAutor(Autor autor) {
-        this.autor = autor;
-    }
 
     public Livro(Resultado resultado) {
         this.titulo = resultado.getTitulo();
         this.idioma = String.valueOf(resultado.getIdioma()).replace("[","").replace("]","");
         this.numeroDownloads = resultado.getNumeroDownloads();
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public String getIdioma() {
+        return idioma;
+    }
+
+    public Integer getNumeroDownloads() {
+        return numeroDownloads;
+    }
+
+    public Autor getAutor() {
+        return autor;
+    }
+
+    public void setAutor(Autor autor) {
+        this.autor = autor;
+    }
+
+    @Override
+    public String toString() {
+        return "Livro{" +
+                "id=" + id +
+                ", titulo='" + titulo + '\'' +
+                ", idioma='" + idioma + '\'' +
+                ", numeroDownloads=" + numeroDownloads +
+                ", autor=" + autor +
+                '}';
     }
 }
