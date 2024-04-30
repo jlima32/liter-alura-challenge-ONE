@@ -1,6 +1,10 @@
 package br.com.site.literalurachallengeONE.principal;
 
+import java.util.Scanner;
+
 public class Principal {
+    private Scanner leitura = new Scanner(System.in);
+
     public void exibeMenu(){
         var opcao = -1;
         var menu = """
@@ -39,5 +43,20 @@ public class Principal {
                 System.out.println("Opção Inválida!");
         }
 
+    }
+
+    private void listarLivrosIdioma() {
+    }
+
+    private void listarAutoresVivosAno() {
+    }
+
+    private void listarAutores() {
+    }
+
+    private void listarLivros() {
+    }
+
+    private void buscarLivro() {
     }
 }
