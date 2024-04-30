@@ -1,12 +1,17 @@
 package br.com.site.literalurachallengeONE.principal;
 
+import br.com.site.literalurachallengeONE.model.DadosLivro;
+import br.com.site.literalurachallengeONE.model.Livro;
+import br.com.site.literalurachallengeONE.model.Resultado;
 import br.com.site.literalurachallengeONE.service.ConsumoApi;
+import br.com.site.literalurachallengeONE.service.ConverteDados;
 
 import java.util.Scanner;
 
 public class Principal {
     private Scanner leitura = new Scanner(System.in);
     private ConsumoApi consumo = new ConsumoApi();
+    private ConverteDados conversor = new ConverteDados();
 
     public void exibeMenu(){
         var opcao = -1;
@@ -49,9 +54,28 @@ public class Principal {
     }
 
     private void buscarLivro() {
-        var json = consumo.obterDados("https://gutendex.com/books/?search=dom%20casmurro");
-        System.out.println(json);
+//        var json = consumo.obterDados("https://gutendex.com/books/?search=dom%20casmurro");
+//        System.out.println(json);
+        Livro livro = getDadosLivro();
+        if (livro != null && livro.getResults() != null && !livro.getResults().isEmpty()) {
+            Resultado resultado = livro.getResults().get(0);
+            String title = resultado.getTitle();
+            System.out.println("Título do livro: " + title);
+            System.out.println(resultado);
+        } else {
+            System.out.println("Nenhum livro encontrado");
+        }
     }
+
+    private Livro getDadosLivro(){
+//        System.out.println("Digite o nome do livro para buscar: ");
+//        var nomeLivro = leitura.nextLine();
+        var json = consumo.obterDados("https://gutendex.com/books/?search=ushdusahduhsudu");
+        Livro dados = conversor.obterDados(json, Livro.class);
+        return dados;
+    }
+
+
 
     private void listarLivros() {
     }
