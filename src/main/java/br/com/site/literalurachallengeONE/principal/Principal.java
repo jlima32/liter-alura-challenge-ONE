@@ -1,9 +1,12 @@
 package br.com.site.literalurachallengeONE.principal;
 
+import br.com.site.literalurachallengeONE.service.ConsumoApi;
+
 import java.util.Scanner;
 
 public class Principal {
     private Scanner leitura = new Scanner(System.in);
+    private ConsumoApi consumo = new ConsumoApi();
 
     public void exibeMenu(){
         var opcao = -1;
@@ -45,18 +48,24 @@ public class Principal {
 
     }
 
-    private void listarLivrosIdioma() {
-    }
-
-    private void listarAutoresVivosAno() {
-    }
-
-    private void listarAutores() {
+    private void buscarLivro() {
+        var json = consumo.obterDados("https://gutendex.com/books/?search=dom%20casmurro");
+        System.out.println(json);
     }
 
     private void listarLivros() {
     }
 
-    private void buscarLivro() {
+    private void listarAutores() {
     }
+
+    private void listarAutoresVivosAno() {
+    }
+
+    private void listarLivrosIdioma() {
+    }
+
+
+
+
 }
