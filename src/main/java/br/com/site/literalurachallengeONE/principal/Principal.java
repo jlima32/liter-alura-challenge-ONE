@@ -9,10 +9,12 @@ import br.com.site.literalurachallengeONE.repository.LivroRepository;
 import br.com.site.literalurachallengeONE.service.ConsumoApi;
 import br.com.site.literalurachallengeONE.service.ConverteDados;
 
+import java.util.DoubleSummaryStatistics;
 import java.util.List;
 import java.util.Scanner;
 
 public class Principal {
+    DoubleSummaryStatistics doubleSummaryStatistics = new DoubleSummaryStatistics();
     private LivroRepository repositorioLivro;
     private AutorRepository repositorioAutor;
     private Scanner leitura = new Scanner(System.in);
@@ -107,12 +109,16 @@ public class Principal {
     private void listarLivros() {
         List<Livro> livros = repositorioLivro.findAllByOrderByTitulo();
         livros.forEach(livro -> imprimeLivro(livro.getTitulo(),livro.getAutor().getNome(),livro.getIdioma(),livro.getNumeroDownloads()));
+        var stats = livros.size();
+        System.out.println("\nLivros cadastrados: " + stats);
         exibeMenu();
     }
 
     private void listarAutores() {
         List<Autor> autores = repositorioAutor.findAllByOrderByNome();
         autores.forEach(autor -> imprimeAutor(autor.getNome(),autor.getAnoNascimento(), autor.getAnoFalecimento()));
+        var stats = autores.size();
+        System.out.println("\nAutores cadastrados: " + stats);
         exibeMenu();
     }
 
@@ -121,6 +127,8 @@ public class Principal {
         int ano = leitura.nextInt();
         List<Autor> autores = repositorioAutor.listarAutoresAno(ano);
         autores.forEach(autor -> imprimeAutor(autor.getNome(),autor.getAnoNascimento(), autor.getAnoFalecimento()));
+        var stats = autores.size();
+        System.out.println("\nAutores encontrados: " + stats);
         exibeMenu();
     }
 
@@ -138,6 +146,8 @@ public class Principal {
             System.out.println("\nNão existem livros nesse idioma no banco de dados.\n");
         }else{
             livros.forEach(livro -> imprimeLivro(livro.getTitulo(),livro.getAutor().getNome(),livro.getIdioma(),livro.getNumeroDownloads()));
+            var stats = livros.size();
+            System.out.println("\nLivros encontrados: " + stats);
         }
         exibeMenu();
     }
