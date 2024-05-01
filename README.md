@@ -3,8 +3,7 @@
 
 ![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=java&logoColor=white) ![Spring](https://img.shields.io/badge/Spring-6DB33F?style=for-the-badge&logo=spring&logoColor=white) ![Postgresql](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)
 
-[<img src="https://i.ytimg.com/vi/Hc79sDi3f0U/maxresdefault.jpg" width="50%">](https://www.youtube.com/watch?v=Hc79sDi3f0U "Now in Android: 55")
-
+https://github.com/jlima32/liter-alura-challenge-ONE/assets/110911412/ea1ce091-9709-4322-b9a5-561899ec63bf
 
 > Projeto desenvolvido como parte do desafio LiterAlura, que propõe a construção de um catálogo de livros interativo via console. 
 O catálogo permite aos usuários interagirem com as informações sobre livros e autores, realizando consultas a uma API específica, manipulando dados JSON, armazenando informações em um banco de dados PostgreSQL e filtrando os resultados conforme as opções disponíveis.
