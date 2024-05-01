@@ -116,6 +116,11 @@ public class Principal {
     }
 
     private void listarAutoresVivosAno() {
+        System.out.println("Digite o ano que deseja pesquisar: ");
+        int ano = leitura.nextInt();
+        List<Autor> autores = repositorioAutor.listarAutoresAno(ano);
+        autores.forEach(autor -> imprimeAutor(autor.getNome(),autor.getAnoNascimento(), autor.getAnoFalecimento()));
+        exibeMenu();
     }
 
     private void listarLivrosIdioma() {

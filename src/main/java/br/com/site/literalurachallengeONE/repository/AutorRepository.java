@@ -14,4 +14,7 @@ public interface AutorRepository extends JpaRepository<Autor, Long> {
     List<Livro> livroPorAutor(String nome);
 
     List<Autor> findAllByOrderByNome();
+
+    @Query("SELECT autor FROM Autor autor WHERE autor.anoFalecimento >= :ano ORDER BY autor.anoFalecimento")
+    List<Autor> listarAutoresAno(int ano);
 }
