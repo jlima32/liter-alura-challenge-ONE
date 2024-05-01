@@ -13,4 +13,5 @@ public interface AutorRepository extends JpaRepository<Autor, Long> {
     @Query("SELECT l FROM Autor a JOIN a.livros l WHERE a.nome ILIKE %:nome%")
     List<Livro> livroPorAutor(String nome);
 
+    List<Autor> findAllByOrderByNome();
 }

@@ -110,7 +110,7 @@ public class Principal {
     }
 
     private void listarAutores() {
-        List<Autor> autores = repositorioAutor.findAll();
+        List<Autor> autores = repositorioAutor.findAllByOrderByNome();
         autores.forEach(autor -> imprimeAutor(autor.getNome(),autor.getAnoNascimento(), autor.getAnoFalecimento()));
         exibeMenu();
     }
