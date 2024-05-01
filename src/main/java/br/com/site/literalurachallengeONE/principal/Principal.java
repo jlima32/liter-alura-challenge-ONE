@@ -36,6 +36,7 @@ public class Principal {
                 3 - Listar Autores Registrados
                 4 - Listar Autores Vivos em um Determinado Ano
                 5 - Listar Livros em um Determinado Idioma
+                6 - Top 10 (livros mais baixados)
                 0 - Encerrar Aplicação
                 """;
 
@@ -59,6 +60,9 @@ public class Principal {
             case 5:
                 listarLivrosIdioma();
                 break;
+            case 6:
+                top10MaisBaixados();
+                break;
             case 0:
                 System.out.println("Encerrando a Aplicação...");
                 break;
@@ -67,6 +71,8 @@ public class Principal {
         }
 
     }
+
+
 
     private Autor buscarLivro() {
         DadosLivro dadosLivro = getDadosLivro();
@@ -149,6 +155,12 @@ public class Principal {
             var stats = livros.size();
             System.out.println("\nLivros encontrados: " + stats);
         }
+        exibeMenu();
+    }
+
+    private void top10MaisBaixados() {
+        List<Livro> livros = repositorioLivro.findTop10ByOrderByNumeroDownloadsDesc();
+        livros.forEach(livro -> imprimeLivro(livro.getTitulo(),livro.getAutor().getNome(),livro.getIdioma(),livro.getNumeroDownloads()));
         exibeMenu();
     }
 
