@@ -28,6 +28,7 @@ public class Principal {
     public void exibeMenu(){
         var opcao = -1;
         var menu = """
+                #### MENU LITERALURA ####
                 1 - Buscar Livro Pelo Título
                 2 - Listar Livros Registrados
                 3 - Listar Autores Registrados
@@ -124,6 +125,21 @@ public class Principal {
     }
 
     private void listarLivrosIdioma() {
+        System.out.println("""
+                            Insira o idioma para realizar a busca:
+                            es - Espanhol
+                            en - IngLês
+                            fr - Francês
+                            pt - Português 
+                            """);
+        String idioma = leitura.nextLine();
+        List<Livro> livros = repositorioLivro.listarLivrosPorIdioma(idioma);
+        if (livros.isEmpty()){
+            System.out.println("\nNão existem livros nesse idioma no banco de dados.\n");
+        }else{
+            livros.forEach(livro -> imprimeLivro(livro.getTitulo(),livro.getAutor().getNome(),livro.getIdioma(),livro.getNumeroDownloads()));
+        }
+        exibeMenu();
     }
 
     private void imprimeLivro(String title, String autor, String idioma, int downloads){
